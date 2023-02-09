@@ -5,6 +5,7 @@ Feature: Reqres API Automation Testing QE-9
     When Send request get list users
     Then Status code should be 200 OK
     And Response body page should be <page>
+    And Validate get list user json schema
   Examples:
     |page|
     |1   |

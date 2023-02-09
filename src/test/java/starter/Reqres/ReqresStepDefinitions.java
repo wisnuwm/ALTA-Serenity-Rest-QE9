@@ -6,8 +6,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Steps;
+import starter.Utils.Constant;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -36,13 +38,19 @@ public class ReqresStepDefinitions {
 
     @And("Response body page should be {int}")
     public void responseBodyPageShouldBe(int page) {
-        SerenityRest.then().body("page", equalTo(page));
+        SerenityRest.then().body(ReqresResponses.PAGE, equalTo(page));
+    }
+
+    @And("Validate get list user json schema")
+    public void validateGetListUserJsonSchema() {
+        File jsonSchemaListUser = new File(Constant.JSON_SCHEMA +"ListUserJSONSchema.json");
+        SerenityRest.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(jsonSchemaListUser));
     }
 
     //scenario 2
     @Given("Create new user with valid json")
     public void createNewUserWithValidJson() {
-        File jsonReq = new File(ReqresAPI.DIR+"/src/test/resources/JSON/ReqBody/UsersReqBody.json");
+        File jsonReq = new File(Constant.JSON_REQ_BODY+"UsersReqBody.json");
         reqresAPI.postCreateUser(jsonReq);
     }
 
@@ -59,14 +67,14 @@ public class ReqresStepDefinitions {
     @And("Response body name should be {string} and job is {string}")
     public void responseBodyNameShouldBeAndJobIs(String name, String job) {
         SerenityRest.then()
-                    .body("name",equalTo(name))
-                    .body("job",equalTo(job));
+                    .body(ReqresResponses.NAME,equalTo(name))
+                    .body(ReqresResponses.JOB,equalTo(job));
     }
 
     //scenario 3
     @Given("Update user with valid json and parameter id {int}")
     public void updateUserWithValidJsonAndParameterId(int id) {
-        File jsonReq = new File(ReqresAPI.DIR+"/src/test/resources/JSON/ReqBody/UsersReqBody.json");
+        File jsonReq = new File(Constant.JSON_REQ_BODY+"UsersReqBody.json");
         reqresAPI.putUpdateUser(id,jsonReq);
     }
 
