@@ -5,15 +5,13 @@ import java.io.File;
 import io.restassured.http.ContentType;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Step;
+import starter.Utils.Constant;
 
 public class ReqresAPI {
-    public static final String BASE_URL = "https://reqres.in";
-    public static final String DIR = System.getProperty("user.dir");
-
-    public static String GET_LIST_USERS = BASE_URL+"/api/users?page={page}";
-    public static String POST_CREATE_USER = BASE_URL+"/api/users";
-    public static String PUT_UPDATE_USER = BASE_URL+"/api/users/{id}";
-    public static String DELETE_USER = BASE_URL+"/api/users/{id}";
+    public static String GET_LIST_USERS = Constant.BASE_URL+"/api/users?page={page}";
+    public static String POST_CREATE_USER = Constant.BASE_URL+"/api/users";
+    public static String PUT_UPDATE_USER = Constant.BASE_URL+"/api/users/{id}";
+    public static String DELETE_USER = Constant.BASE_URL+"/api/users/{id}";
 
     @Step("Get list users")
     public void getListUsers(int page){
