@@ -1,4 +1,4 @@
-package starter.Reqres;
+package starter.StepDef;
 
 import java.io.File;
 
@@ -9,6 +9,8 @@ import io.cucumber.java.en.When;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import net.serenitybdd.rest.SerenityRest;
 import net.thucydides.core.annotations.Steps;
+import starter.Reqres.ReqresAPI;
+import starter.Reqres.ReqresResponses;
 import starter.Utils.Constant;
 
 import static org.hamcrest.Matchers.equalTo;
